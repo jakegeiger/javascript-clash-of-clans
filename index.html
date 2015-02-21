@@ -1,6 +1,8 @@
-git st<html>
+<html>
+  <head>
 <script src="jaws.js"></script>
 <script src="/socket.io/socket.io.js"></script>
+</head>
 <body>
 
 <h1>Invash Cho Base!</h1>
@@ -9,11 +11,7 @@ git st<html>
 <div id="info">
     <h1>ViewPort and TileMap</h1>
 </div>
-
-<script>
-
-
-
+<div id="live_info"></div>
 
 <script>
   function MyGameState() {
@@ -21,19 +19,31 @@ git st<html>
     var fps;
     var viewport;
     var tile_map;
-    var archer_png = "Clash-of-Clans/Troops/Archer/Archer-lvl-1.png";
-    var archer_queen_stand_png = "Clash-of-Clans/Buildings/Army-Buildings/Archer-Queen-Altar/250px-Queenaltar.png";
+    var archer_png = "Clash-of-Clans/Troops/Archer/Archer-lvl-1_180x180.png";
+    var archer_queen_stand_png = "Clash-of-Clans/Buildings/Army-Buildings/Archer-Queen-Altar/250px-Queenaltar_250x250.png";
     var archer_queen_stands;
 
     this.setup = function() {
       var live_info = document.getElementById("live_info");
       archer_queen_stands = new jaws.SpriteList();
-      var world = new jaws.Rect(0, 0, 320*10, 320*2);
+      var world = new jaws.Rect(0, 0, 32*100, 32*20);
       
       /* Create the row of archer stands for the archer to stand on */
-      for(var x = 0; x < world.width; x+=32){
-        
+      for(var x = 0; x < world.width; x+=250){
+        archer_queen_stands.push( new Sprite({
+            image: archer_queen_stand_png, 
+                x: x, 
+                y: world.height-250
+          }));
       }
+      
+      /* todo: what is the correct tile size for me? */
+      /* todo: what is the difference between tile_map and world? */
+      tile_map = new jaws.TileMap({size: [100, 100], cell_size: [32, 32]});
+      tile_map.push(archer_queen_stands);
+      
+      viewport = 
+      
       player = new jaws.Sprite({image: archer_png, x: 10, y: 200});
       robot = new jaws.Sprite({x: 200, y: 200});
       robot.animation = new jaws.Animation({sprite_sheet: "images/droid_11x15.png", frame_size: [11,15], frame_duration: 120});

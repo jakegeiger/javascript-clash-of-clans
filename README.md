@@ -9,7 +9,7 @@ create new workspace from url
 
 run
 
-npm install socket.io
+    npm install socket.io
 
 Oh and you are going to need to read this [over at cloud9 support][1] and the comments there-in
 
